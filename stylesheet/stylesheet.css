@@ -18,7 +18,7 @@ header {
 
 .logo {
   padding: 10px 0px 5px;
-  width: 250px;
+  width: 300px;
 }
 
 h2 {
@@ -50,6 +50,7 @@ select {
   border: 1px solid gray;
   border-radius: 3px;
   margin: 3px;
+  background-color: white;
 }
 button {
   background-color: #343536;
