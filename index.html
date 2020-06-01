@@ -194,6 +194,7 @@
                 id="staThreeLetterSwitch"
                 checked="checked"
                 onclick="update();"
+                v-model="staThreeLetterSwitch"
               />
               <label for="sta-threeLetter"
                 >スリーレターコードあり<input
@@ -201,6 +202,7 @@
                   class="small"
                   value="UEN"
                   id="sta-threeLetter"
+                  v-show="staThreeLetterSwitch"
               /></label>
             </div>
 
