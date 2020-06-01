@@ -1,0 +1,115 @@
+@charset "UTF-8";
+* {
+  font-size: 100%;
+  line-height: 1.5;
+}
+
+.wrapper {
+  margin: 0 auto;
+  padding: 0 4%;
+}
+
+/*header*/
+header {
+  background: #363636;
+  display: flex;
+  align-items: flex-end;
+}
+
+.logo {
+  padding: 10px 0px 5px;
+  width: 250px;
+}
+
+h2 {
+  color: white;
+  padding: 10px;
+}
+
+/*header終わり*/
+/*main*/
+.flex {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.control {
+  margin: 0 5px;
+  padding: 5px 15px;
+  width: 430px;
+  background-color: gainsboro;
+  border-radius: 5px;
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.6));
+}
+input.small {
+  width: 60px;
+}
+input,
+select {
+  border: 1px solid gray;
+  border-radius: 3px;
+  margin: 3px;
+}
+button {
+  background-color: #343536;
+  color: whitesmoke;
+  margin: 2px;
+}
+a {
+  text-decoration: none;
+}
+.canvas-wrapper {
+  position: relative;
+  display: none;
+}
+.canvas-wrapper canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#result {
+  width: 130px;
+  height: 610px;
+  margin: 0 20px 0 0;
+}
+
+.producer {
+  display: block;
+  margin: 50px auto;
+  padding-top: 20px;
+  border-top: 0.5px solid gray;
+  text-align: center;
+  width: 90%;
+  max-width: 600px;
+}
+/*mainおわり*/
+
+/*モバイル版*/
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .logo {
+    display: block;
+    margin: 10px auto 0;
+  }
+
+  h2 {
+    margin: 10px 0 0;
+    text-align: center;
+  }
+  .control {
+    width: 205px;
+    padding: 5px;
+    margin: 0 0 10px;
+  }
+  input {
+    max-width: 190px;
+  }
+  #result {
+    margin: 0 5px 0 0;
+  }
+}

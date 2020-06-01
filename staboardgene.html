@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>縦型駅名看板ジェネレーター</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link
+      href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@800"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:700&text=0123456789"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato:700&text=ABDEFGHIJLMNOPQRSTUVWXYZ"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="stylesheet/stylesheet.css" />
+    <link rel="stylesheet" href="stylesheet/modern-css-reset.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+  </head>
+
+  <body>
+    <header class="wrapper">
+      <img class="logo" src="images/logo.svg"></img>
+      <h2>縦型駅名標ジェネレーター</h2>
+    </header>
+
+    <div id="app">
+      <div class="main">
+        <div class="flex">
+          <canvas id="result" width="260" height="1220"
+            >canvasをサポートしたブラウザが必要です。</canvas
+          >
+
+          <div class="control">
+            <label for="synchronize"
+              ><input
+                type="checkbox"
+                name="synchronize"
+                id="sameColor"
+                onclick="update();"
+                checked="checked"
+                v-model="doubleColor"
+              />ラインカラーを二色指定</label
+            ><br />
+            <label for="color1"
+              >路線色1<input
+                type="color"
+                value="#F68B1E"
+                name="color1"
+                id="color1"
+            /></label>
+
+            <label for="color2" v-show="doubleColor"
+              >路線色2<input
+                type="color"
+                value="#257BCB"
+                name="color2"
+                id="color2" /></label
+            ><br />
+
+            <label for="name-ja"
+              >駅名(日本語)<input
+                type="text"
+                value="うえの"
+                name="name-ja"
+                id="sta-name-ja"
+                v-model="staNameJa"
+            /></label>
+            <br />
+            <label for="name-en"
+              >駅名(英　語)<input
+                type="text"
+                value="Ueno"
+                name="name-en"
+                id="sta-name-en"
+            /></label>
+            <br />
+            <label for="name-ch"
+              >駅名(中国語)<input
+                type="text"
+                value="上野"
+                name="name-ch"
+                id="sta-name-ch"
+            /></label>
+            <br />
+            <label for="name-ko"
+              >駅名(韓国語)<input
+                type="text"
+                value="우에노"
+                name="name-ko"
+                id="sta-name-ko"
+            /></label>
+            <br />
+            <a
+              target="_blank"
+              :href="'https://translate.google.com/?hl=ja#view=home&op=translate&sl=ja&tl=zh-CN&text=' + staNameJa"
+              >Google翻訳を開く</a
+            ><br />
+            <input
+              type="checkbox"
+              name="staNum"
+              id="staNumSwitch"
+              checked="checked"
+              onclick="update();"
+              v-model="num"
+            />
+            <label for="staNum"
+              >駅ナンバリングあり(1)<input
+                type="text"
+                class="small"
+                value="JU 02"
+                id="sta-num"
+                v-show="num"
+            /></label>
+            <br />
+
+            <input
+              type="checkbox"
+              name="staNum2"
+              id="staNumSwitch2"
+              checked="checked"
+              onclick="update();"
+              v-model="doubleNum"
+              v-show="num"
+            />
+            <label for="staNum2" v-show="num"
+              >駅ナンバリングあり(2)<input
+                type="text"
+                class="small"
+                value="JJ 01"
+                id="sta-num2"
+                v-show="doubleNum"
+            /></label>
+            <div v-show="num">
+              <label for="color1N"
+                >ナンバリング色1<input
+                  type="color"
+                  value="#F68B1E"
+                  name="color1N"
+                  id="color1N"
+                  v-show="synchronizeNC==='自由選択'"
+              /></label>
+              <label for="synchronizeNC"
+                ><select
+                  name="synchronizeNC"
+                  id="synchronizeNC"
+                  v-model="synchronizeNC"
+                  ><option>自由選択</option>
+                  <option selected="selected">路線色1と一致</option>
+                  <option>路線色2と一致</option></select
+                ></label
+              >
+            </div>
+
+            <div v-show="num">
+              <label for="color2N" v-show="doubleNum"
+                >ナンバリング色2<input
+                  type="color"
+                  value="#00B261"
+                  name="color2N"
+                  id="color2N"
+                  v-show="synchronizeNC2==='自由選択'"
+              /></label>
+              <label for="synchronizeNC2"
+                ><select
+                  name="synchronizeNC2"
+                  id="synchronizeNC2"
+                  v-model="synchronizeNC2"
+                  v-show="doubleNum"
+                >
+                  <option selected="selected">自由選択</option>
+                  <option>路線色1と一致</option>
+                  <option>路線色2と一致</option>
+                </select></label
+              >
+            </div>
+
+            <div v-show="num">
+              <input
+                type="checkbox"
+                name="sta-threeLetter"
+                id="staThreeLetterSwitch"
+                checked="checked"
+                onclick="update();"
+              />
+              <label for="sta-threeLetter"
+                >スリーレターコードあり<input
+                  type="text"
+                  class="small"
+                  value="UEN"
+                  id="sta-threeLetter"
+              /></label>
+            </div>
+
+            <button onclick="update();">指定内容を反映</button>
+            <button onclick="download();">画像として保存</button>
+          </div>
+
+          
+        </div>
+
+        <div class="producer">
+          <span>つくった人:</span><a href="https://twitter.com/soburapid217">S'R217</a>
+          <p>バグの報告、追加機能の要望はこちらまで</p>
+          <p>β版のため、バグが多い可能性があります。また、入力内容は保存されません。</p>
+          
+        </div>
+      </div>
+    <div class="canvas-wrapper">
+      <canvas id="base" width="260" height="1220"></canvas>
+      <canvas id="staname" width="260" height="1220"></canvas>
+      <canvas id="numbering" width="260" height="1220"></canvas>
+      <canvas id="numbering2" width="260" height="1220"></canvas>
+      <canvas id="threeLetter" width="260" height="1220"></canvas>
+    </div>
+    </div>
+    <!-- 開発バージョン、便利なコンソールの警告が含まれています -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="script/script.js"></script>
+  </body>
+</html>
