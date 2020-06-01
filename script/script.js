@@ -8,6 +8,7 @@ var vm = new Vue({
     num: true,
     synchronizeNC: "路線色1と一致",
     synchronizeNC2: "自由選択",
+    staThreeLetterSwitch:"true",
   },
   //computed: {
   //  callData: function () {
