@@ -9,6 +9,7 @@ var vm = new Vue({
     synchronizeNC: "路線色1と一致",
     synchronizeNC2: "自由選択",
     staThreeLetterSwitch: true,
+    localCharacter: false,
   },
   //computed: {
   //  callData: function () {
@@ -64,6 +65,7 @@ function update() {
   station.numbering = document.getElementById("staNumSwitch").checked;
   station.numbering2 = document.getElementById("staNumSwitch2").checked;
   station.threeLS = document.getElementById("staThreeLetterSwitch").checked;
+  station.localCharacter = document.getElementById("localCharacter").checked;
   station.lineColor1 = document.getElementById("color1").value;
   station.lineColor2 = document.getElementById("color2").value;
 
@@ -89,6 +91,17 @@ function update() {
     default:
       station.numColor2 = color2N.value;
       break;
+  }
+
+  station.lCImage = new Image();
+
+  switch (document.getElementById("localCharacterSelect").value) {
+    case "むすび丸":
+      station.lCImage.src = "images/onigiriBanana.png";
+      break;
+    //case "hoge":
+    //  station.lCImage.src  = "images/hoge.png";
+    //  break;
   }
 
   station.staNameJa = document.getElementById("sta-name-ja").value;
@@ -267,4 +280,7 @@ function draw(station) {
 
   ctxR.drawImage(canvas2, 0, 0);
   ctxR.drawImage(canvas5, 0, 0);
+  if (station.localCharacter) {
+    ctxR.drawImage(station.lCImage, 50, 50, 170, 170);
+  }
 }

@@ -71,36 +71,32 @@
                 id="color2" /></label
             ><br />
 
-            <label for="name-ja"
+            <label for="sta-name-ja"
               >駅名(日本語)<input
                 type="text"
                 value="うえの"
-                name="name-ja"
                 id="sta-name-ja"
                 v-model="staNameJa"
             /></label>
             <br />
-            <label for="name-en"
+            <label for="sta-name-en"
               >駅名(英　語)<input
                 type="text"
                 value="Ueno"
-                name="name-en"
                 id="sta-name-en"
             /></label>
             <br />
-            <label for="name-ch"
+            <label for="sta-name-ch"
               >駅名(中国語)<input
                 type="text"
                 value="上野"
-                name="name-ch"
                 id="sta-name-ch"
             /></label>
             <br />
-            <label for="name-ko"
+            <label for="sta-name-ko"
               >駅名(韓国語)<input
                 type="text"
                 value="우에노"
-                name="name-ko"
                 id="sta-name-ko"
             /></label>
             <br />
@@ -111,13 +107,12 @@
             ><br />
             <input
               type="checkbox"
-              name="staNum"
               id="staNumSwitch"
               checked="checked"
               onclick="update();"
               v-model="num"
             />
-            <label for="staNum"
+            <label for="staNumSwitch"
               >駅ナンバリングあり(1)<input
                 type="text"
                 class="small"
@@ -129,14 +124,13 @@
 
             <input
               type="checkbox"
-              name="staNum2"
               id="staNumSwitch2"
               checked="checked"
               onclick="update();"
               v-model="doubleNum"
               v-show="num"
             />
-            <label for="staNum2" v-show="num"
+            <label for="staNumSwitch2" v-show="num"
               >駅ナンバリングあり(2)<input
                 type="text"
                 class="small"
@@ -145,15 +139,14 @@
                 v-show="doubleNum"
             /></label>
             <div v-show="num">
-              <label for="color1N"
+              <label 
                 >ナンバリング色1<input
                   type="color"
                   value="#F68B1E"
-                  name="color1N"
                   id="color1N"
                   v-show="synchronizeNC==='自由選択'"
               /></label>
-              <label for="synchronizeNC"
+              <label
                 ><select
                   name="synchronizeNC"
                   id="synchronizeNC"
@@ -166,15 +159,14 @@
             </div>
 
             <div v-show="num">
-              <label for="color2N" v-show="doubleNum"
+              <label  v-show="doubleNum"
                 >ナンバリング色2<input
                   type="color"
                   value="#00B261"
-                  name="color2N"
                   id="color2N"
                   v-show="synchronizeNC2==='自由選択'"
               /></label>
-              <label for="synchronizeNC2"
+              <label 
                 ><select
                   name="synchronizeNC2"
                   id="synchronizeNC2"
@@ -191,13 +183,12 @@
             <div v-show="num">
               <input
                 type="checkbox"
-                name="sta-threeLetter"
                 id="staThreeLetterSwitch"
                 checked="checked"
                 onclick="update();"
                 v-model="staThreeLetterSwitch"
               />
-              <label for="sta-threeLetter"
+              <label for="staThreeLetterSwitch"
                 >スリーレターコードあり<input
                   type="text"
                   class="small"
@@ -206,6 +197,14 @@
                   v-show="staThreeLetterSwitch"
               /></label>
             </div>
+
+            <div>
+            <input type="checkbox" id="localCharacter"  onclick="update();" v-model="localCharacter"
+             />
+            <label for="localCharacter">ご当地キャラクターあり<select  id="localCharacterSelect"  v-show="localCharacter">
+              <option selected="selected">むすび丸</option>
+              <!--<option></option>-->
+            </select></label></div>
 
             <button onclick="update();">指定内容を反映</button>
             <button onclick="download();">画像として保存</button>
@@ -229,8 +228,8 @@
       <canvas id="threeLetter" width="260" height="1220"></canvas>
     </div>
     </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <!-- 開発バージョン、便利なコンソールの警告が含まれています -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="script/script.js"></script>
   </body>
 </html>
