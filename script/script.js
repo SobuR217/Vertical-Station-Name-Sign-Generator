@@ -164,7 +164,10 @@ var vm = new Vue({
       ctxSN.font = `bold 130px ${jaFont}`;
       ctxSN.textAlign = "center";
       ctxSN.fillStyle = "#383838";
-      var textList = this.staNameJa.split("");
+      let staNameJaReplaced = this.staNameJa
+        .replace(/ー/g, "l")
+        .replace(/-/g, "l");
+      var textList = staNameJaReplaced.split("");
       function writeVertical() {
         textList.forEach((tx, i) => {
           ctxSN.fillText(tx, 130, 466 + 120 * (i - 1), 120);
