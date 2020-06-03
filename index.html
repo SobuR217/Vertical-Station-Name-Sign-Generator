@@ -48,6 +48,7 @@
             <label for="synchronize"
               ><input
                 type="checkbox"
+                id="synchronize"
                 v-model="doubleColor"
                 @change="draw"
               />ラインカラーを二色指定</label
@@ -57,7 +58,7 @@
             /></label>
 
             <label for="color2"
-              >路線色2<input type="color" id="color2" v-model="color2"
+              >路線色2<input type="color" id="color2" v-model="color2" v-show="doubleColor"
             /></label>
             <br />
 
