@@ -103,14 +103,14 @@ a {
     text-align: center;
   }
   .control {
-    width: 205px;
-    padding: 5px;
-    margin: 0 0 10px;
+    width: 233px;
+    padding: 3px;
+    margin: 0 5px 10px;
   }
   input {
     max-width: 190px;
   }
   #result {
-    margin: 0 5px 0 0;
+    margin: 0;
   }
 }
