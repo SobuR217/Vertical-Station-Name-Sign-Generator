@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>縦型駅名看板ジェネレーター</title>
     <meta charset="UTF-8" />
+    <title>VerticalNasige - 縦型駅名看板ジェネレーター</title>
+    <meta
+      name="description"
+      content="JR東日本式の縦型駅名標を再現できます。ナンバリング、スリーレターコードにも対応。"
+    />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
     <link
@@ -48,7 +52,6 @@
             <label for="synchronize"
               ><input
                 type="checkbox"
-                id="synchronize"
                 v-model="doubleColor"
                 @change="draw"
               />ラインカラーを二色指定</label
@@ -57,7 +60,7 @@
               >路線色1<input type="color" id="color" v-model="color"
             /></label>
 
-            <label for="color2" v-show="doubleColor"
+            <label for="color2"
               >路線色2<input type="color" id="color2" v-model="color2"
             /></label>
             <br />

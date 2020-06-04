@@ -115,20 +115,24 @@ var vm = new Vue({
       ctxN.textAlign = "center";
       ctxN.fillStyle = "#383838";
       ctxN.font = `bold 47px ${numFont}`;
-      ctxN.fillText(numText, 130, y + 42, 200);
+      ctxN.fillText(numText, 130, y + 42, 112);
       ctxN.font = `bold 65px ${numFont}`;
-      ctxN.fillText(num, 130, y + 97, 200);
+      ctxN.fillText(num, 130, y + 97, 112);
     },
 
     draw() {
+      let staNameJaReplaced = this.staNameJa
+        .replace(/ー/g, "l")
+        .replace(/-/g, "l");
+      var textList = staNameJaReplaced.split("");
+      ctxSN.beginPath();
+      ctxSN.clearRect(0, 0, 260, 1220 / (450 / textList.length / 120));
       ctxN.beginPath();
       ctxN.clearRect(0, 0, 260, 1220);
       ctxR.beginPath();
       ctxR.clearRect(0, 0, 260, 1220);
       ctx.beginPath();
       ctx.clearRect(0, 0, 260, 1220);
-      ctxSN.beginPath();
-      ctxSN.clearRect(0, 0, 260, 2070);
       ctxN2.beginPath();
       ctxN2.clearRect(0, 0, 260, 1220);
       ctxT.beginPath();
@@ -136,64 +140,44 @@ var vm = new Vue({
       //本体
 
       ctx.fillStyle = "white";
-      ctx.fillRect(0, 0, 130 * 2, 610 * 2);
+      ctx.fillRect(0, 0, 260, 1220);
       ctx.shadowColor = "gray";
-      ctx.shadowBlur = 5 * 2;
+      ctx.shadowBlur = 10;
       ctx.fillStyle = "whitesmoke";
       ctx.beginPath(); //パスリセット
-      ctx.moveTo(5 * 2, 10 * 2); //スタート地点
-      ctx.arc(10 * 2, 10 * 2, 5 * 2, Math.PI, 1.5 * Math.PI, false); //左上
-      ctx.lineTo(120 * 2, 5 * 2); //直線上
-      ctx.arc(120 * 2, 10 * 2, 5 * 2, 1.5 * Math.PI, 0, false); //右上
-      ctx.lineTo(125 * 2, 600 * 2); //直線右
-      ctx.arc(120 * 2, 600 * 2, 5 * 2, 0, 0.5 * Math.PI, false); //右下
-      ctx.lineTo(10 * 2, 605 * 2); //直線下
-      ctx.arc(10 * 2, 600 * 2, 5 * 2, 0.5 * Math.PI, Math.PI, false); //左下
+      ctx.moveTo(10, 20); //スタート地点
+      ctx.arc(20, 20, 10, Math.PI, 1.5 * Math.PI, false); //左上
+      ctx.lineTo(240, 10); //直線上
+      ctx.arc(240, 20, 10, 1.5 * Math.PI, 0, false); //右上
+      ctx.lineTo(250, 1200); //直線右
+      ctx.arc(240, 1200, 10, 0, 0.5 * Math.PI, false); //右下
+      ctx.lineTo(20, 1210); //直線下
+      ctx.arc(20, 1200, 10, 0.5 * Math.PI, Math.PI, false); //左下
       ctx.closePath(); //パスを閉じる(直線左)
       ctx.fill();
       //ラインカラー
       ctx.shadowBlur = 0;
       ctx.fillStyle = this.color;
-      ctx.fillRect(41 * 2, 5 * 2, 48 * 2, 90 * 2);
+      ctx.fillRect(82, 10, 96, 180);
       if (this.doubleColor) {
         ctx.fillStyle = this.color2;
-        ctx.fillRect(65 * 2, 5 * 2, 24 * 2, 90 * 2);
+        ctx.fillRect(130, 10, 48, 180);
       }
       //駅名描画
       ctxSN.setTransform(1, 0, 0, 1, 0, 0);
       ctxSN.font = `bold 130px ${jaFont}`;
       ctxSN.textAlign = "center";
       ctxSN.fillStyle = "#383838";
-      let staNameJaReplaced = this.staNameJa
-        .replace(/ー/g, "l")
-        .replace(/-/g, "l");
-      var textList = staNameJaReplaced.split("");
       function writeVertical() {
         textList.forEach((tx, i) => {
-          ctxSN.fillText(tx, 130, 466 + 120 * (i - 1), 120);
+          ctxSN.fillText(tx, 130, 220 + 120 * (i - 1), 120);
         });
       }
-      if (
-        textList.length >= 4 &&
-        textList.length <= 5 &&
-        this.numbering &&
-        this.numbering2
-      ) {
-        ctxSN.setTransform(1, 0, 0, 0.8, 0, 5);
+      if (textList.length >= 4 && this.numbering && this.numbering2) {
+        ctxSN.setTransform(1, 0, 0, 450 / textList.length / 120, 0, 0);
         writeVertical();
-      } else if (
-        textList.length >= 6 &&
-        textList.length <= 7 &&
-        this.numbering &&
-        this.numbering2
-      ) {
-        ctxSN.setTransform(1, 0, 0, 0.6, 0, 60);
-        writeVertical();
-      } else if (textList.length === 6 || textList.length === 7) {
-        ctxSN.setTransform(1, 0, 0, 0.77, 0, 15);
-        writeVertical();
-      } else if (textList.length >= 8) {
-        ctxSN.setTransform(1, 0, 0, 0.6, 0, 60);
+      } else if (textList.length >= 6) {
+        ctxSN.setTransform(1, 0, 0, 600 / textList.length / 120, 0, 0);
         writeVertical();
       } else {
         writeVertical();
@@ -204,13 +188,13 @@ var vm = new Vue({
       ctx.fillStyle = "#383838";
       //駅名英語
       ctx.font = `bold 50px ${enFont}`;
-      ctx.fillText(this.staNameEn, 65 * 2, 550 * 2, 100 * 2);
+      ctx.fillText(this.staNameEn, 130, 1100, 200);
       //駅名中国語
       ctx.font = `32px ${chFont}`;
-      ctx.fillText(this.staNameCh, 65 * 2, 572 * 2, 100 * 2);
+      ctx.fillText(this.staNameCh, 130, 1144, 200);
       //駅名韓国語
       ctx.font = `32px ${koFont}`;
-      ctx.fillText(this.staNameKo, 65 * 2, 594 * 2, 100 * 2);
+      ctx.fillText(this.staNameKo, 130, 1188, 200);
       //ナンバリング
       //スリーレターコード
       if (this.staThreeLetterSwitch && this.numbering) {
@@ -232,7 +216,7 @@ var vm = new Vue({
         ctxT.fillStyle = "whitesmoke";
         ctxT.textAlign = "center";
         ctxT.font = `47px ${numFont}`;
-        ctxT.fillText(this.threeL, 130, y + 11.5, 200);
+        ctxT.fillText(this.threeL, 130, y + 11.5, 112);
       }
 
       if (this.numbering && !this.numbering2) {
@@ -244,7 +228,7 @@ var vm = new Vue({
 
       //合成
       ctxR.drawImage(canvas1, 0, 0);
-      ctxR.drawImage(canvas4, 0, 0);
+      ctxR.drawImage(canvas4, 0, 250);
 
       ctxR.drawImage(canvas3, 0, 0);
 
