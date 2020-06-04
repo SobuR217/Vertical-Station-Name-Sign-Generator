@@ -170,7 +170,7 @@ var vm = new Vue({
       ctxSN.fillStyle = "#383838";
       function writeVertical() {
         textList.forEach((tx, i) => {
-          ctxSN.fillText(tx, 130, 220 + 120 * (i - 1), 120);
+          ctxSN.fillText(tx, 130, 230 + 120 * (i - 1), 120);
         });
       }
       if (textList.length >= 4 && this.numbering && this.numbering2) {
@@ -231,7 +231,7 @@ var vm = new Vue({
 
       //合成
       ctxR.drawImage(canvas1, 0, 0);
-      ctxR.drawImage(canvas4, 0, 250);
+      ctxR.drawImage(canvas4, 0, 240);
 
       ctxR.drawImage(canvas3, 0, 0);
 
