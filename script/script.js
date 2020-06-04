@@ -176,8 +176,11 @@ var vm = new Vue({
       if (textList.length >= 4 && this.numbering && this.numbering2) {
         ctxSN.setTransform(1, 0, 0, 450 / textList.length / 120, 0, 0);
         writeVertical();
-      } else if (textList.length >= 6) {
+      } else if (textList.length >= 6 && this.numbering) {
         ctxSN.setTransform(1, 0, 0, 600 / textList.length / 120, 0, 0);
+        writeVertical();
+      } else if (textList.length >= 7) {
+        ctxSN.setTransform(1, 0, 0, 760 / textList.length / 120, 0, 0);
         writeVertical();
       } else {
         writeVertical();
