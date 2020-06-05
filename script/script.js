@@ -2,6 +2,7 @@ window.onbeforeunload = function (e) {
   e.returnValue = "行った変更が保存されない可能性があります。";
 };
 let defaultData = {
+  backgroundDraw: true,
   color: "#F68B1E",
   color2: "#257BCB",
   numColorPrevious1: "#F68B1E",
@@ -138,9 +139,10 @@ var vm = new Vue({
       ctxT.beginPath();
       ctxT.clearRect(0, 0, 260, 1220);
       //本体
-
-      ctx.fillStyle = "white";
-      ctx.fillRect(0, 0, 260, 1220);
+      if (this.backgroundDraw) {
+        ctx.fillStyle = "white";
+        ctx.fillRect(0, 0, 260, 1220);
+      }
       ctx.shadowColor = "gray";
       ctx.shadowBlur = 10;
       ctx.fillStyle = "whitesmoke";

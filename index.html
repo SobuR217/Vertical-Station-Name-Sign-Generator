@@ -49,6 +49,14 @@
           >
 
           <div class="control">
+            <label for="backgroundDraw"
+              ><input
+                type="checkbox"
+                id="backgroundDraw"
+                v-model="backgroundDraw"
+                @change="draw"
+              />背景を描画する</label
+            ><br />
             <label for="synchronize"
               ><input
                 type="checkbox"
@@ -185,13 +193,14 @@
 
             <button @click="draw(); save();">指定内容を反映</button>
             <button @click="reset();">指定内容をリセット</button>
-            <button @click="download">画像として保存</button>
+            <button @click="draw();　download();">画像として保存</button>
           </div>
         </div>
         <div class="producer">
           <span>つくった人:</span
           ><a href="https://twitter.com/soburapid217">S'R217</a>
           <p>バグの報告、追加機能の要望はこちらまで</p>
+          <p>背景を描画しない場合、素材として使いやすくなります。</p>
           <p>
             β版のため、バグが多い可能性があります。
           </p>
