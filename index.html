@@ -66,28 +66,52 @@
               />ラインカラーを二色指定</label
             ><br />
             <label for="color"
-              >路線色1<input type="color" id="color" v-model="color"
+              >路線色1<input
+                type="color"
+                id="color"
+                v-model="color"
+                @change="save"
             /></label>
 
             <label for="color2" v-show="doubleColor"
-              >路線色2<input type="color" id="color2" v-model="color2"
+              >路線色2<input
+                type="color"
+                id="color2"
+                v-model="color2"
+                @change="save"
             /></label>
             <br />
 
             <label for="name-ja"
-              >駅名(日本語)<input type="text" id="name-ja" v-model="staNameJa"
+              >駅名(日本語)<input
+                type="text"
+                id="name-ja"
+                v-model="staNameJa"
+                @change="save"
             /></label>
             <br />
             <label for="name-en"
-              >駅名(英　語)<input type="text" id="name-en" v-model="staNameEn"
+              >駅名(英　語)<input
+                type="text"
+                id="name-en"
+                v-model="staNameEn"
+                @change="save"
             /></label>
             <br />
             <label for="name-ch"
-              >駅名(中国語)<input type="text" id="name-ch" v-model="staNameCh"
+              >駅名(中国語)<input
+                type="text"
+                id="name-ch"
+                v-model="staNameCh"
+                @change="save"
             /></label>
             <br />
             <label for="name-ko"
-              >駅名(韓国語)<input type="text" id="name-ko" v-model="staNameKo"
+              >駅名(韓国語)<input
+                type="text"
+                id="name-ko"
+                v-model="staNameKo"
+                @change="save"
             /></label>
             <br />
             <a
@@ -100,7 +124,7 @@
               type="checkbox"
               id="staNum"
               v-model="numbering"
-              @change="draw"
+              @change="draw(); save();"
             />
             <label for="staNum"
               >駅ナンバリングあり(1)<input
@@ -108,6 +132,7 @@
                 class="small"
                 v-model="numPrevious1"
                 v-show="numbering"
+                @change="save"
             /></label>
             <br />
 
@@ -116,7 +141,7 @@
               id="staNum2"
               v-model="numbering2"
               v-show="numbering"
-              @change="draw"
+              @change="draw(); save();"
             />
             <label for="staNum2" v-show="numbering"
               >駅ナンバリングあり(2)<input
@@ -124,6 +149,7 @@
                 class="small"
                 v-model="numPrevious2"
                 v-show="numbering2"
+                @change="save"
             /></label>
             <div v-show="numbering">
               <label v-show="numbering"
@@ -131,9 +157,14 @@
                   type="color"
                   v-model="numColorPrevious1"
                   v-show="synchronizeNC==='自由選択'"
+                  @change="save"
               /></label>
               <label
-                ><select v-model="synchronizeNC" v-show="numbering">
+                ><select
+                  v-model="synchronizeNC"
+                  v-show="numbering"
+                  @change="save"
+                >
                   <option>自由選択</option>
                   <option selected="selected">路線色1と一致</option>
                   <option>路線色2と一致</option>
@@ -147,9 +178,14 @@
                   type="color"
                   v-model="numColorPrevious2"
                   v-show="synchronizeNC2==='自由選択'"
+                  @change="save"
               /></label>
               <label
-                ><select v-model="synchronizeNC2" v-show="numbering2">
+                ><select
+                  v-model="synchronizeNC2"
+                  v-show="numbering2"
+                  @change="save"
+                >
                   <option selected="selected">自由選択</option>
                   <option>路線色1と一致</option>
                   <option>路線色2と一致</option>
@@ -162,7 +198,7 @@
                 type="checkbox"
                 id="staThreeLetterSwitch"
                 v-model="staThreeLetterSwitch"
-                @change="draw"
+                @change="draw(); save();"
               />
               <label for="staThreeLetterSwitch"
                 >スリーレターコードあり<input
@@ -171,6 +207,7 @@
                   id="sta-threeLetter"
                   v-model="threeL"
                   v-show="staThreeLetterSwitch"
+                  @change="save"
               /></label>
             </div>
 
@@ -178,13 +215,14 @@
               type="checkbox"
               id="localCharacter"
               v-model="localCharacter"
-              @change="draw"
+              @change="draw(); save();"
             />
             <label for="localCharacter"
               >ご当地キャラクターあり<select
                 id="localCharacterSelect"
                 v-model="localCharacterWho"
                 v-show="localCharacter"
+                @change="save"
               >
                 <option selected="selected">むすび丸</option>
                 <!--<option></option>-->
